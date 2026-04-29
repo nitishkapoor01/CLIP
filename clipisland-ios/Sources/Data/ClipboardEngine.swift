@@ -25,7 +25,9 @@ final class ClipboardEngine: ObservableObject {
             object: UIPasteboard.general,
             queue: .main
         ) { [weak self] _ in
-            self?.captureIfNeeded()
+            Task { @MainActor in
+                self?.captureIfNeeded()
+            }
         }
 
         // Keep a lightweight poll fallback for cases where change notification misses.

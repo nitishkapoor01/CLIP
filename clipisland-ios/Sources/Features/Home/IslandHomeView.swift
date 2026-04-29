@@ -50,7 +50,7 @@ struct IslandHomeView: View {
         let collapsedMinHeight: CGFloat = 84
         let expandedMinHeight: CGFloat = 200
 
-        VStack(spacing: 10) {
+        return VStack(spacing: 10) {
             Button {
                 withAnimation(.spring(response: 0.4, dampingFraction: 0.85)) {
                     expanded.toggle()
