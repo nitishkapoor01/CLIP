@@ -31,7 +31,7 @@ struct IslandHomeView: View {
                     .ignoresSafeArea()
             )
             .navigationTitle("ClipIsland")
-            .onChange(of: store.clips.count) { _, _ in
+            .onChange(of: store.clips.count) { _ in
                 showPulse = true
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) { showPulse = false }
             }
