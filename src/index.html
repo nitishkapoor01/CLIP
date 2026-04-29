@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ClipIsland Prototype</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="hero">
+        <p class="kicker">Clipboard Intelligence</p>
+        <h1>ClipIsland</h1>
+        <p class="subtitle">
+          Dynamic Island powered clipboard memory for links, OTPs, calls, notes,
+          and rapid paste flows.
+        </p>
+      </header>
+
+      <section class="island-stage">
+        <div id="slideNotice" class="slide-notice hidden"></div>
+        <button id="dynamicIsland" class="dynamic-island collapsed" aria-label="Toggle ClipIsland panel">
+          <div class="island-collapsed">
+            <div class="left-cluster">
+              <span id="clipIcon" class="chip-icon">📋</span>
+              <div class="counter-pill">
+                <span id="clipCount">0</span>
+              </div>
+            </div>
+            <span id="latestPreview" class="latest-preview">Nothing saved yet</span>
+          </div>
+
+          <div class="island-expanded">
+            <div class="expanded-top">
+              <h2>Clipboard Stack</h2>
+              <div class="swipe-controls">
+                <button id="prevClip" class="mini-btn" type="button">◀</button>
+                <button id="nextClip" class="mini-btn" type="button">▶</button>
+              </div>
+            </div>
+
+            <article id="activeCard" class="clip-card"></article>
+
+            <div class="stack-head">
+              <h3>Recent Clips</h3>
+              <button id="clearHistory" type="button" class="ghost-btn">Clear</button>
+            </div>
+            <ul id="clipList" class="clip-list"></ul>
+          </div>
+        </button>
+      </section>
+
+      <section class="controls">
+        <div class="toggle-row">
+          <label class="switch">
+            <input id="autoSaveToggle" type="checkbox" checked />
+            <span class="slider"></span>
+          </label>
+          <div>
+            <p class="label">Enable Auto Save Clipboard</p>
+            <small>Polls clipboard every 3 seconds</small>
+          </div>
+        </div>
+        <button id="manualCapture" class="action-btn" type="button">Capture Clipboard Now</button>
+      </section>
+
+      <section class="capsules">
+        <div class="section-head">
+          <h3>Copy Capsules</h3>
+          <p>Reusable bundles for one-tap productivity</p>
+        </div>
+        <div id="capsuleGrid" class="capsule-grid"></div>
+      </section>
+
+      <section class="keyboard-tab">
+        <div class="section-head">
+          <h3>Smart Keyboard Tab</h3>
+          <p>Tap to paste instantly from saved clips</p>
+        </div>
+        <div id="keyboardKeys" class="key-grid"></div>
+      </section>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

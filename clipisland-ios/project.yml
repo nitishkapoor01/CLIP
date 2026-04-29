@@ -1,0 +1,42 @@
+name: ClipIsland
+options:
+  minimumXcodeGenVersion: 2.38.0
+packages: {}
+targets:
+  ClipIsland:
+    type: application
+    platform: iOS
+    deploymentTarget: "16.1"
+    sources:
+      - path: Sources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.nitis.clipisland
+        INFOPLIST_KEY_UIApplicationSceneManifest_Generation: YES
+        INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_CFBundleDisplayName: ClipIsland
+        SWIFT_VERSION: 5.10
+    info:
+      path: Info.plist
+      properties:
+        UIApplicationSupportsMultipleScenes: false
+  ClipIslandWidgetExtension:
+    type: app-extension
+    platform: iOS
+    deploymentTarget: "16.1"
+    sources:
+      - path: Widget
+      - path: Sources/LiveActivity
+      - path: Sources/Domain/Models
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.nitis.clipisland.widget
+        INFOPLIST_KEY_CFBundleDisplayName: ClipIslandWidget
+        SWIFT_VERSION: 5.10
+        INFOPLIST_KEY_NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    info:
+      path: Widget/Info.plist
+      properties:
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
