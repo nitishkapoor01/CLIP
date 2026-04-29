@@ -16,6 +16,7 @@ targets:
         INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: YES
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
         INFOPLIST_KEY_CFBundleDisplayName: ClipIsland
+        INFOPLIST_KEY_NSSupportsLiveActivities: YES
         SWIFT_VERSION: 5.10
     info:
       path: Info.plist
@@ -33,6 +34,7 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.nitis.clipisland.widget
         INFOPLIST_KEY_CFBundleDisplayName: ClipIslandWidget
+        INFOPLIST_KEY_NSSupportsLiveActivities: YES
         SWIFT_VERSION: 5.10
         INFOPLIST_KEY_NSExtensionPointIdentifier: com.apple.widgetkit-extension
     info:

@@ -17,14 +17,19 @@ struct IslandHomeView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: 16) {
-                    island
-                    controls
-                    CapsulesView(store: store)
-                    KeyboardTabView(store: store)
+            GeometryReader { proxy in
+                ScrollView {
+                    VStack(spacing: 16) {
+                        island(screenWidth: proxy.size.width)
+                        controls
+                        CapsulesView(store: store)
+                        KeyboardTabView(store: store)
+                    }
+                    .frame(maxWidth: min(proxy.size.width - 24, 420))
+                    .padding(.horizontal, 12)
+                    .padding(.top, 10)
+                    .padding(.bottom, max(proxy.safeAreaInsets.bottom, 16))
                 }
-                .padding()
             }
             .background(
                 LinearGradient(colors: [.black, Color.blue.opacity(0.35)], startPoint: .topLeading, endPoint: .bottomTrailing)
@@ -34,12 +39,17 @@ struct IslandHomeView: View {
             .onChange(of: store.clips.count) { _ in
                 showPulse = true
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.7) { showPulse = false }
+                LiveActivityManager.shared.update(with: store.clips)
             }
             .onAppear { engine.start() }
         }
     }
 
-    private var island: some View {
+    private func island(screenWidth: CGFloat) -> some View {
+        let islandWidth = min(max(screenWidth - 24, 300), 390)
+        let collapsedMinHeight: CGFloat = 84
+        let expandedMinHeight: CGFloat = 200
+
         VStack(spacing: 10) {
             Button {
                 withAnimation(.spring(response: 0.4, dampingFraction: 0.85)) {
@@ -75,8 +85,10 @@ struct IslandHomeView: View {
                 .foregroundStyle(.white)
                 .padding(16)
                 .frame(maxWidth: .infinity, alignment: .leading)
+                .frame(minHeight: expanded ? expandedMinHeight : collapsedMinHeight)
             }
             .buttonStyle(.plain)
+            .frame(width: islandWidth)
             .background(.ultraThinMaterial)
             .clipShape(RoundedRectangle(cornerRadius: expanded ? 26 : 36, style: .continuous))
             .overlay {
@@ -98,6 +110,7 @@ struct IslandHomeView: View {
                 .buttonStyle(.bordered)
             }
         }
+        .frame(maxWidth: .infinity)
     }
 
     private var controls: some View {

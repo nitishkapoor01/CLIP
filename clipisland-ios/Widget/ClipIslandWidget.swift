@@ -2,6 +2,13 @@ import ActivityKit
 import SwiftUI
 import WidgetKit
 
+@main
+struct ClipIslandWidgetBundle: WidgetBundle {
+    var body: some Widget {
+        ClipIslandWidget()
+    }
+}
+
 struct ClipIslandWidget: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: ClipIslandAttributes.self) { context in
