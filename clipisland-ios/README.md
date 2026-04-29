@@ -34,7 +34,10 @@ This is a native SwiftUI scaffold for ClipIsland (not a web wrapper).
 
 1. Push this project to GitHub with `.github/workflows/ios-ipa.yml`.
 2. Open GitHub -> Actions -> `Build iOS IPA (Unsigned)`.
-3. Click `Run workflow` and select `Release`.
+3. Click `Run workflow` and select:
+   - `build_mode: full` for app + widget/live activity extension
+   - `build_mode: app-only` for fallback (widget removed from IPA)
+   - `configuration: Release`
 4. After success, download artifact `clipisland-ipa-*`.
 5. On Windows, open Sideloadly and select downloaded `*-unsigned.ipa`.
 6. Sign/install with your Apple ID.

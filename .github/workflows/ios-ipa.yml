@@ -3,6 +3,14 @@ name: Build iOS IPA (Unsigned)
 on:
   workflow_dispatch:
     inputs:
+      build_mode:
+        description: Build mode
+        type: choice
+        required: true
+        default: full
+        options:
+          - full
+          - app-only
       configuration:
         description: Build configuration
         type: choice
@@ -61,12 +69,17 @@ jobs:
           rm -rf export
           mkdir -p export/Payload
           cp -R "${APP_PATH}" export/Payload/
+
+          if [[ "${{ github.event.inputs.build_mode }}" == "app-only" ]]; then
+            rm -rf export/Payload/ClipIsland.app/PlugIns
+          fi
+
           cd export
-          /usr/bin/zip -r "ClipIsland-${{ github.event.inputs.configuration }}-unsigned.ipa" Payload
+          /usr/bin/zip -r "ClipIsland-${{ github.event.inputs.configuration }}-${{ github.event.inputs.build_mode }}-unsigned.ipa" Payload
 
       - name: Upload IPA artifact
         uses: actions/upload-artifact@v4
         with:
-          name: clipisland-ipa-${{ github.run_number }}
-          path: clipisland-ios/export/ClipIsland-${{ github.event.inputs.configuration }}-unsigned.ipa
+          name: clipisland-ipa-${{ github.event.inputs.build_mode }}-${{ github.run_number }}
+          path: clipisland-ios/export/ClipIsland-${{ github.event.inputs.configuration }}-${{ github.event.inputs.build_mode }}-unsigned.ipa
           if-no-files-found: error
